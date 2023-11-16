@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:moon_phase_project/models/Login.dart';
 import 'package:moon_phase_project/repositories/login_repository.dart';
-import 'package:moon_phase_project/views/homePage.dart';
-import 'package:moon_phase_project/views/registerPage.dart';
+import 'package:moon_phase_project/views/loginPage.dart';
 
-import '../models/Login.dart';
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   LoginRepository loginRepository = LoginRepository();
 
-  List<Login> todos = [];
+  List<Login> registros = [];
 
   @override
-  void initState(){
+  void initState() {
     super.initState(); // Essa linha é obrigatória
     loginRepository.getTodoList().then((value) {
       setState(() {
-        todos = value;
+        registros = value;
       });
     });
   }
@@ -43,18 +41,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: ListView(
-            children: <Widget>[
-              Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Bem-vindo',
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20),
-                  )
-              ),
+            children: [
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -93,41 +80,32 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {
-                  //Esqueci a senha
-                  nameController.clear();
-                  passwordController.clear();
-                  loginRepository.cleanShared();
-                  todos.clear();
-                },
-                child: const Text(
-                  'Esquece a senha?',
-                ),
-              ),
-              const SizedBox(height: 16),
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
-                    child: const Text('Login'),
+                    child: const Text('Cadastrar'),
                     onPressed: () {
-                      //pushReplacement
-
-                      if(checkLogin(nameController.text, passwordController.text, todos)){
+                      String usuario = nameController.text;
+                      String senha = passwordController.text;
+                      if(checkCadastro(usuario, senha)) {
+                        Login newRegistro = Login(
+                            usuario: usuario,
+                            senha: senha);
+                        registros.add(newRegistro);
                         nameController.clear();
                         passwordController.clear();
+
+                        loginRepository.saveLoginList(registros);
 
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
                         );
                       }else{
-                        nameController.clear();
-                        passwordController.clear();
-
                         Fluttertoast.showToast(
-                            msg: "Usuário ou senha inválido.",
+                            msg: "Todos os campos são obrigatórios.",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 1,
@@ -138,28 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                   )),
-              const SizedBox(height: 16),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'Não tem conta?',
-                      style: TextStyle(
-                          color: Colors.blue),
-                    ),
-                    TextButton(
-                      child: const Text(
-                        'Cadastra-se',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegisterPage()),
-                        );
-                      },
-                    )
-                  ]),
             ],
           ),
         ),
@@ -168,15 +124,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-bool checkLogin (String usuario, String senha, List<Login> lista){
-
-  if(usuario.isNotEmpty && senha.isNotEmpty){
-    for (Login login in lista){
-      if(login.usuario == usuario && login.senha == senha){
-        return true;
-      }
-    }
+bool checkCadastro(String usuario, String senha) {
+  if (usuario.isNotEmpty && senha.isNotEmpty) {
+    return true;
   }
-
   return false;
 }

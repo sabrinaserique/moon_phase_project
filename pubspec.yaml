@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl:
   flutter_slidable:
+  shared_preferences: ^2.0.20
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
