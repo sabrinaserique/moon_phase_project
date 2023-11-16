@@ -17,12 +17,14 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.black,
           centerTitle: true,
           bottom: const TabBar(
+            labelColor: Colors.blue,
             tabs: [
               Tab(text: 'Hoje'),
               Tab(text: 'Próximos 30 dias'),
             ],
           ),
-          title: const Text('Fases da Lua'),
+          title:
+              const Text('Fases da Lua', style: TextStyle(color: Colors.blue)),
         ),
         body: TabBarView(
           children: [

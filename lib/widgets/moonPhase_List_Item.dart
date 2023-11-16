@@ -24,20 +24,20 @@ class MoonPhaseListItem extends StatelessWidget {
               'Data: ${DateFormat('dd/MM/yyyy').format(moonPhase.data)}',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
+                color: Colors.blue,
               ),
             ),
             Text(
               'Dia lunar Conway: ${moonPhase.diaLunarConway}',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white,
+                color: Colors.blue,
               ),
             ),
             Text('Fase da lua (provável) Conway: ${moonPhase.fase_lua}',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
+                  color: Colors.blue,
                 )
             ),
             const SizedBox(height: 16),

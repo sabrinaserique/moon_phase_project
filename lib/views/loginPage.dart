@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   List<Login> todos = [];
 
   @override
-  void initState(){
+  void initState() {
     super.initState(); // Essa linha é obrigatória
     loginRepository.getTodoList().then((value) {
       setState(() {
@@ -40,10 +40,10 @@ class _LoginPageState extends State<LoginPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: ListView(
-            children: <Widget>[
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
@@ -53,8 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                         fontSize: 20),
-                  )
-              ),
+                  )),
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -108,21 +107,24 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16),
               Container(
                   height: 50,
+                  width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     child: const Text('Login'),
                     onPressed: () {
                       //pushReplacement
 
-                      if(checkLogin(nameController.text, passwordController.text, todos)){
+                      if (checkLogin(nameController.text,
+                          passwordController.text, todos)) {
                         nameController.clear();
                         passwordController.clear();
 
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
                         );
-                      }else{
+                      } else {
                         nameController.clear();
                         passwordController.clear();
 
@@ -133,8 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                             timeInSecForIosWeb: 1,
                             backgroundColor: Colors.blue,
                             textColor: Colors.white,
-                            fontSize: 16.0
-                        );
+                            fontSize: 16.0);
                       }
                     },
                   )),
@@ -144,8 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     const Text(
                       'Não tem conta?',
-                      style: TextStyle(
-                          color: Colors.blue),
+                      style: TextStyle(color: Colors.blue),
                     ),
                     TextButton(
                       child: const Text(
@@ -155,12 +155,13 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const RegisterPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()),
                         );
                       },
                     )
                   ]),
-            ],
+            ]),
           ),
         ),
       ),
@@ -168,11 +169,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-bool checkLogin (String usuario, String senha, List<Login> lista){
-
-  if(usuario.isNotEmpty && senha.isNotEmpty){
-    for (Login login in lista){
-      if(login.usuario == usuario && login.senha == senha){
+bool checkLogin(String usuario, String senha, List<Login> lista) {
+  if (usuario.isNotEmpty && senha.isNotEmpty) {
+    for (Login login in lista) {
+      if (login.usuario == usuario && login.senha == senha) {
         return true;
       }
     }

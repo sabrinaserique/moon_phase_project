@@ -38,10 +38,10 @@ class _RegisterPageState extends State<RegisterPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: ListView(
-            children: [
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -82,16 +82,16 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 16),
               Container(
                   height: 50,
+                  width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     child: const Text('Cadastrar'),
                     onPressed: () {
                       String usuario = nameController.text;
                       String senha = passwordController.text;
-                      if(checkCadastro(usuario, senha)) {
-                        Login newRegistro = Login(
-                            usuario: usuario,
-                            senha: senha);
+                      if (checkCadastro(usuario, senha)) {
+                        Login newRegistro =
+                            Login(usuario: usuario, senha: senha);
                         registros.add(newRegistro);
                         nameController.clear();
                         passwordController.clear();
@@ -103,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           MaterialPageRoute(
                               builder: (context) => const LoginPage()),
                         );
-                      }else{
+                      } else {
                         Fluttertoast.showToast(
                             msg: "Todos os campos são obrigatórios.",
                             toastLength: Toast.LENGTH_SHORT,
@@ -111,12 +111,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             timeInSecForIosWeb: 1,
                             backgroundColor: Colors.blue,
                             textColor: Colors.white,
-                            fontSize: 16.0
-                        );
+                            fontSize: 16.0);
                       }
                     },
                   )),
-            ],
+            ]),
           ),
         ),
       ),

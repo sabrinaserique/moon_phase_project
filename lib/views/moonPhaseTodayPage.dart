@@ -34,21 +34,21 @@ class _MoonPhaseTodayPageState extends State<MoonPhaseTodayPage> {
                   'Data: ${DateFormat('dd/MM/yyyy').format(widget.moonPhase.data)}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
+                    color: Colors.blue,
                   ),
                 ),
                 Text(
                   'Dia lunar Conway: ${widget.moonPhase.diaLunarConway}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
+                    color: Colors.blue,
                   ),
                 ),
                 Text(
                     'Fase da lua (provável) Conway: ${widget.moonPhase.fase_lua}',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.white,
+                      color: Colors.blue,
                     )),
                 const SizedBox(height: 16),
                 Image.asset(widget.moonPhase.imagem),
