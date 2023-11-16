@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       child: const Text(
-                        'Cadastra-se',
+                        'Cadastre-se',
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
