@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.black,
+            centerTitle: true,
             bottom: const TabBar(
               tabs: [
                 Tab(text: 'Hoje'),
