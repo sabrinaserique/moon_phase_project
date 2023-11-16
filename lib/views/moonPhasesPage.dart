@@ -19,7 +19,7 @@ class _MoonPhasesPageState extends State<MoonPhasesPage> {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/icone.jpg'),
+              image: AssetImage('assets/images/sky.jpg'),
               fit: BoxFit.cover,
               opacity: 0.6,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moon_phase_project/views/moonPhaseTodayPage.dart';
 import 'package:moon_phase_project/views/moonPhasesPage.dart';
-
+import 'models/Moon.dart';
 import 'models/MoonPhase.dart';
 
 void main() {
@@ -12,10 +13,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MoonPhasesPage(moonPhases: printLunarAnalysis()),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: 'Hoje'),
+                Tab(text: 'Próximos 30 dias'),
+              ],
+            ),
+            title: const Text('Fases da Lua'),
+          ),
+          body: TabBarView(
+            children: [
+              MoonPhaseTodayPage(moonPhase: printLunarTodayAnalysis()),
+              MoonPhasesPage(moonPhases: printLunarAnalysis()),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -31,31 +51,40 @@ int getLunarDay(DateTime dia) {
   return lunarDay;
 }
 
-String getMoonPhaseConway(int lunarDay) {
+Moon getMoonPhaseConway(int lunarDay) {
   if (lunarDay <= 28) {
     if (lunarDay >= 24) {
-      return "Minguante";
+      return Moon(fase_lua: 'Minguante', imagem: 'assets/images/minguante.jpg');
     }
     if (lunarDay >= 22) {
-      return "Quarto Minguante";
+      return Moon(
+          fase_lua: 'Quarto Minguante',
+          imagem: 'assets/images/quartoMinguante.jpg');
     }
     if (lunarDay >= 17) {
-      return "Minguante Gibosa";
+      return Moon(
+          fase_lua: 'Minguante Gibosa',
+          imagem: 'assets/images/minguanteGibosa.jpg');
     }
     if (lunarDay >= 14) {
-      return "Lua Cheia";
+      return Moon(fase_lua: 'Lua Cheia', imagem: 'assets/images/luaCheia.jpg');
     }
     if (lunarDay >= 9) {
-      return "Crescente Gibosa";
+      return Moon(
+          fase_lua: 'Crescente Gibosa',
+          imagem: 'assets/images/crescenteGibosa.jpg');
     }
     if (lunarDay >= 7) {
-      return "Quarto Crescente";
+      return Moon(
+          fase_lua: 'Quarto Crescente',
+          imagem: 'assets/images/quartoCrescente.jpg');
     }
     if (lunarDay >= 2) {
-      return "Crescente";
+      return Moon(fase_lua: 'Crescente', imagem: 'assets/images/crescente.jpg');
     }
   }
-  return "Lua Nova"; //0,1,29
+  return Moon(
+      fase_lua: 'Lua Nova', imagem: 'assets/images/luaNova.jpg'); //0,1,29
 }
 
 int getLunarDayConway(DateTime ldt) {
@@ -91,16 +120,23 @@ int getLunarDayConway(DateTime ldt) {
 List<MoonPhase> printLunarAnalysis() {
   DateTime now = DateTime.now();
   DateTime endDate = now.add(const Duration(days: 30));
-  String nomeLua;
+  Moon luaFase;
   int lunarDayConway;
-  List<MoonPhase> list =[];
+  List<MoonPhase> list = [];
+  MoonPhase lua;
 
   DateTime dia = now;
+  dia = dia.add(Duration(days: 1));
 
-  while(dia.isBefore(endDate)) {
+  while (dia.isBefore(endDate)) {
     lunarDayConway = getLunarDayConway(dia);
-    nomeLua = getMoonPhaseConway(lunarDayConway);
-    MoonPhase lua = MoonPhase(fase_lua: nomeLua, data: dia, diaLunarConway: lunarDayConway);
+    luaFase = getMoonPhaseConway(lunarDayConway);
+
+    lua = MoonPhase(
+        fase_lua: luaFase.fase_lua,
+        data: dia,
+        diaLunarConway: lunarDayConway,
+        imagem: luaFase.imagem);
 
     list.add(lua);
 
@@ -110,4 +146,19 @@ List<MoonPhase> printLunarAnalysis() {
   return list;
 }
 
+MoonPhase printLunarTodayAnalysis() {
+  DateTime now = DateTime.now();
+  int lunarDayConway;
 
+  DateTime dia = now;
+
+  lunarDayConway = getLunarDayConway(dia);
+  Moon lua = getMoonPhaseConway(lunarDayConway);
+  MoonPhase luaFase = MoonPhase(
+      fase_lua: lua.fase_lua,
+      data: dia,
+      diaLunarConway: lunarDayConway,
+      imagem: lua.imagem);
+
+  return luaFase;
+}
