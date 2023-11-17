@@ -17,6 +17,8 @@ dependencies:
   flutter_slidable:
   shared_preferences: ^2.0.20
   fluttertoast: ^8.2.4
+  hexcolor: ^3.0.1
+  styled_text: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -30,7 +32,8 @@ flutter:
   uses-material-design: true
   assets:
      - assets/images/
-     -
+     - assets/images/background/
+
   fonts:
     - family: Poppins
       fonts:

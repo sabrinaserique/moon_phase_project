@@ -3,11 +3,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:moon_phase_project/repositories/login_repository.dart';
 import 'package:moon_phase_project/views/homePage.dart';
 import 'package:moon_phase_project/views/registerPage.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:styled_text/styled_text.dart';
 
 import '../models/Login.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -34,64 +36,100 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/sky.jpg'),
-            fit: BoxFit.cover,
-          ),
+        decoration: BoxDecoration(
+          color: HexColor('#263238')
         ),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+
+              //Titulo
               Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Bem-vindo',
-                    style: TextStyle(
+                  child: StyledText(
+                    text: 'Bem-vindo ao <italic>Fases da Lua</italic>',
+                    tags: {
+                      'italic': StyledTextTag(
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic
+                        )
+                      )
+                    },
+                    style: const TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                         fontSize: 20),
-                  )),
+                  )
+              ),
+
+              //Imagem
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Image(
+                  image:  AssetImage('../assets/images/background/earth_and_moon.png'),
+                  fit: BoxFit.cover,
+                  width: 580,
+                ),
+              ),
+
+              //Usuario
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
                   cursorColor: Colors.blue,
-                  style: TextStyle(color: Colors.blue),
+                  style: const TextStyle(color: Colors.blue),
                   controller: nameController,
                   decoration: const InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.blue, width: 0.0),
+                          BorderSide(color: Colors.blue),
                     ),
-                    labelText: 'Usuario',
+                    labelText: 'Usuário',
+                    hintText: 'Insira seu usuário',
                     labelStyle: TextStyle(
                       color: Colors.blue,
+                      fontSize: 16
+                    ),
+                    hintStyle: TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 12
                     ),
                   ),
                 ),
               ),
+
+              //Senha
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextField(
                   obscureText: true,
-                  style: TextStyle(color: Colors.blue),
+                  style: const TextStyle(color: Colors.blue),
                   cursorColor: Colors.blue,
                   controller: passwordController,
                   decoration: const InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.blue, width: 0.0),
+                          BorderSide(color: Colors.blue),
                     ),
                     labelText: 'Senha',
+                    hintText: 'Insira sua senha',
                     labelStyle: TextStyle(
-                      color: Colors.blue,
+                        color: Colors.blue,
+                        fontSize: 16
+                    ),
+                    hintStyle: TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 12
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
+
+              //Esqueceu a Senha
               TextButton(
                 onPressed: () {
                   //Esqueci a senha
@@ -101,16 +139,22 @@ class _LoginPageState extends State<LoginPage> {
                   todos.clear();
                 },
                 child: const Text(
-                  'Esquece a senha?',
+                  'Esqueceu a senha?',
                 ),
               ),
               const SizedBox(height: 16),
+
+              //Login
               Container(
                   height: 50,
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
-                    child: const Text('Login'),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(
+                        color: Colors.blue
+                      ),
+                    ),
                     onPressed: () {
                       //pushReplacement
 
@@ -138,7 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 16.0);
                       }
                     },
-                  )),
+                    child: const Text('Login'),
+                  )
+              ),
               const SizedBox(height: 16),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextButton(
                       child: const Text(
                         'Cadastre-se',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 18),
                       ),
                       onPressed: () {
                         Navigator.push(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moon_phase_project/views/homePage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:moon_phase_project/views/loginPage.dart';
 
 void main() {
@@ -7,13 +7,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
+      builder: FToastBuilder(),
+      theme: ThemeData(
+        fontFamily: 'Poppins'
+      ),
     );
   }
 }
