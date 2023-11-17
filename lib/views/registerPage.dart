@@ -124,12 +124,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(top:14, bottom: 14),
                   child: ElevatedButton(
-                    child: const Text(
-                        'Cadastrar',
-                        style: TextStyle(
-                          color: Colors.blue
-                        ),
-                    ),
                     onPressed: () {
                       String usuario = nameController.text;
                       String senha = passwordController.text;
@@ -158,6 +152,22 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontSize: 16.0);*/
                       }
                     },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return Colors.blue.withOpacity(0.2);
+                          }
+                          return Colors.white;
+                        },
+                      ),
+                    ),
+                    child: const Text(
+                        'Cadastrar',
+                        style: TextStyle(
+                          color: Colors.blue
+                        ),
+                    ),
                   )
               ),
               //Imagem
