@@ -78,17 +78,17 @@ int getLunarDay(DateTime dia) {
 Moon getMoonPhaseConway(int lunarDay) {
   if (lunarDay <= 28) {
     if (lunarDay >= 24) {
-      return Moon(fase_lua: 'Minguante', imagem: 'assets/images/minguante.jpg');
+      return Moon(fase_lua: 'Minguante', imagem: '../assets/images/moons/minguante.png');
     }
     if (lunarDay >= 22) {
       return Moon(
           fase_lua: 'Quarto Minguante',
-          imagem: 'assets/images/quartoMinguante.jpg');
+          imagem: '../assets/images/moons/quartoMinguante.png');
     }
     if (lunarDay >= 17) {
       return Moon(
           fase_lua: 'Minguante Gibosa',
-          imagem: 'assets/images/minguanteGibosa.jpg');
+          imagem: '../assets/images/moons/minguanteGibosa.png');
     }
     if (lunarDay >= 14) {
       return Moon(fase_lua: 'Lua Cheia', imagem: '../assets/images/moons/luaCheia.png');
@@ -96,19 +96,19 @@ Moon getMoonPhaseConway(int lunarDay) {
     if (lunarDay >= 9) {
       return Moon(
           fase_lua: 'Crescente Gibosa',
-          imagem: 'assets/images/crescenteGibosa.jpg');
+          imagem: '../assets/images/moons/crescenteGibosa.png');
     }
     if (lunarDay >= 7) {
       return Moon(
           fase_lua: 'Quarto Crescente',
-          imagem: 'assets/images/quartoCrescente.jpg');
+          imagem: '../assets/images/moons/quartoCrescente.png');
     }
     if (lunarDay >= 2) {
       return Moon(fase_lua: 'Crescente', imagem: '../assets/images/moons/crescente.png');
     }
   }
   return Moon(
-      fase_lua: 'Lua Nova', imagem: 'assets/images/luaNova.jpg'); //0,1,29
+      fase_lua: 'Lua Nova', imagem: '../assets/images/moons/luaNova.png'); //0,1,29
 }
 
 int getLunarDayConway(DateTime ldt) {

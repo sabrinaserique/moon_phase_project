@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:styled_text/tags/styled_text_tag.dart';
+import 'package:styled_text/widgets/styled_text.dart';
 import '../models/MoonPhase.dart';
 
 class MoonPhaseListItem extends StatelessWidget {
-  const MoonPhaseListItem({Key? key, required this.moonPhase})
-      : super(key: key);
+  const MoonPhaseListItem({super.key, required this.moonPhase});
   final MoonPhase moonPhase;
 
   @override
@@ -12,42 +14,87 @@ class MoonPhaseListItem extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: Colors.black,
+          color: HexColor('#474753'),
         ),
         margin: const EdgeInsets.symmetric(vertical: 2),
         // separa os elementos da lista
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Data: ${DateFormat('dd/MM/yyyy').format(moonPhase.data)}',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.blue,
-              ),
+            Expanded(
+              child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      StyledText(
+                        text: '<title>Data:</title> <value>${DateFormat('dd/MM/yyyy').format(moonPhase.data)}</value>',
+                        tags: {
+                          'title': StyledTextTag(
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: HexColor('#9b9ca1'),
+                            ),
+                          ),
+                          'value': StyledTextTag(
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white
+                              )
+                          )
+                        },
+                      ),
+                      StyledText(
+                        text: '<title>Dia lunar Conway:</title>  <value>${moonPhase.diaLunarConway}</value>',
+                        tags: {
+                          'title': StyledTextTag(
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: HexColor('#9b9ca1'),
+                            ),
+                          ),
+                          'value': StyledTextTag(
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white
+                              )
+                          )
+                        },
+                      ),
+                      StyledText(
+                          text: '<title>Fase da lua (provável):</title> <value>${moonPhase.fase_lua}</value>',
+                        tags: {
+                          'title': StyledTextTag(
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: HexColor('#9b9ca1'),
+                            ),
+                          ),
+                          'value': StyledTextTag(
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white
+                              )
+                          )
+                        },
+                      ),
+                    ],
+                  ),
             ),
-            Text(
-              'Dia lunar Conway: ${moonPhase.diaLunarConway}',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.blue,
-              ),
-            ),
-            Text('Fase da lua (provável) Conway: ${moonPhase.fase_lua}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blue,
-                )
-            ),
-            const SizedBox(height: 16),
-            Image.asset(
-              moonPhase.imagem,
-              height: 50,
-              width: 50,
-              fit: BoxFit.scaleDown,
+            Column(
+              children: [
+                Image.asset(
+                  moonPhase.imagem,
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit.scaleDown,
+                ),
+              ],
             ),
           ],
-        ));
+        ),
+    );
   }
 }

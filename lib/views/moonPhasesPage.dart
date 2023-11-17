@@ -4,7 +4,7 @@ import '../models/MoonPhase.dart';
 import '../widgets/moonPhase_List_Item.dart';
 
 class MoonPhasesPage extends StatefulWidget{
-  MoonPhasesPage({Key? key, required this.moonPhases}) : super(key: key);
+  MoonPhasesPage({super.key, required this.moonPhases});
   List<MoonPhase> moonPhases;
 
   @override
@@ -19,7 +19,7 @@ class _MoonPhasesPageState extends State<MoonPhasesPage> {
         backgroundColor: Colors.black,
         body: Container(
             decoration: BoxDecoration(
-                color: HexColor('#263238')
+                color: HexColor('#121423')
             ),
           child: Padding(
             padding: const EdgeInsets.all(16),
