@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:moon_phase_project/models/Login.dart';
 import 'package:moon_phase_project/repositories/login_repository.dart';
 import 'package:moon_phase_project/views/loginPage.dart';
+import 'package:styled_text/tags/styled_text_tag.dart';
+import 'package:styled_text/widgets/styled_text.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -31,17 +34,55 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/sky.jpg'),
-            fit: BoxFit.cover,
+      appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
+          leading: const BackButton(
+            color: Colors.white,
           ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+              color: HexColor('#263238')
         ),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+
+              //Titulo
+              Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: const Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Cadastro de Usuários',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Realize o seu cadastro para acessar a aplicação',
+                            style: TextStyle(
+                                color: Colors.blueGrey,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+              ),
+
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -49,9 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(color: Colors.blue),
                   controller: nameController,
                   decoration: const InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: UnderlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.blue, width: 0.0),
+                      BorderSide(color: Colors.blue, width: 0.0),
                     ),
                     labelText: 'Usuario',
                     labelStyle: TextStyle(
@@ -68,9 +109,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   cursorColor: Colors.blue,
                   controller: passwordController,
                   decoration: const InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: UnderlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.blue, width: 0.0),
+                      BorderSide(color: Colors.blue, width: 0.0),
                     ),
                     labelText: 'Senha',
                     labelStyle: TextStyle(
@@ -81,11 +122,16 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 16),
               Container(
-                  height: 50,
+                  height: 80,
                   width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.only(top:14, bottom: 14),
                   child: ElevatedButton(
-                    child: const Text('Cadastrar'),
+                    child: const Text(
+                        'Cadastrar',
+                        style: TextStyle(
+                          color: Colors.blue
+                        ),
+                    ),
                     onPressed: () {
                       String usuario = nameController.text;
                       String senha = passwordController.text;
@@ -104,17 +150,28 @@ class _RegisterPageState extends State<RegisterPage> {
                               builder: (context) => const LoginPage()),
                         );
                       } else {
-                        Fluttertoast.showToast(
+                        /*Fluttertoast.showToast(
                             msg: "Todos os campos são obrigatórios.",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 1,
                             backgroundColor: Colors.blue,
                             textColor: Colors.white,
-                            fontSize: 16.0);
+                            fontSize: 16.0);*/
                       }
                     },
-                  )),
+                  )
+              ),
+              //Imagem
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Image(
+                  image:  AssetImage('../assets/images/background/solar_system.png'),
+                  fit: BoxFit.cover,
+                  width: 450,
+                ),
+              ),
             ]),
           ),
         ),
