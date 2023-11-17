@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import '../models/MoonPhase.dart';
 import '../widgets/moonPhase_List_Item.dart';
 
@@ -17,13 +18,9 @@ class _MoonPhasesPageState extends State<MoonPhasesPage> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/sky.jpg'),
-              fit: BoxFit.cover,
-              opacity: 0.6,
+            decoration: BoxDecoration(
+                color: HexColor('#263238')
             ),
-          ),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(

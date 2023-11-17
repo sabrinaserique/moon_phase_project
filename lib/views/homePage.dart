@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:moon_phase_project/views/moonPhaseTodayPage.dart';
 import 'package:moon_phase_project/views/moonPhasesPage.dart';
 
@@ -14,17 +15,44 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: HexColor('#474753'),
           centerTitle: true,
-          bottom: const TabBar(
-            labelColor: Colors.blue,
-            tabs: [
-              Tab(text: 'Hoje'),
-              Tab(text: 'Próximos 30 dias'),
-            ],
+          leading: const BackButton(
+            color: Colors.white,
           ),
-          title:
-              const Text('Fases da Lua', style: TextStyle(color: Colors.blue)),
+          bottom: TabBar(
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              labelColor: Colors.blueGrey.shade900,
+              unselectedLabelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Colors.white),
+              tabs: const [
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Hoje"),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Próximos 30 dias"),
+                    ),
+                  ),
+                ]
+          ),
+          title: const Text(
+                  'Fases da Lua',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700
+                  )
+              ),
         ),
         body: TabBarView(
           children: [
@@ -36,9 +64,8 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
+//Funções
 const int synodicPeriod = 2551442877; //29.530588854 days
-
 var knownLuaNova = DateTime.parse("1970-01-07T00:00:00.000Z");
 
 int getLunarDay(DateTime dia) {
@@ -64,7 +91,7 @@ Moon getMoonPhaseConway(int lunarDay) {
           imagem: 'assets/images/minguanteGibosa.jpg');
     }
     if (lunarDay >= 14) {
-      return Moon(fase_lua: 'Lua Cheia', imagem: 'assets/images/luaCheia.jpg');
+      return Moon(fase_lua: 'Lua Cheia', imagem: '../assets/images/moons/luaCheia.png');
     }
     if (lunarDay >= 9) {
       return Moon(
@@ -77,7 +104,7 @@ Moon getMoonPhaseConway(int lunarDay) {
           imagem: 'assets/images/quartoCrescente.jpg');
     }
     if (lunarDay >= 2) {
-      return Moon(fase_lua: 'Crescente', imagem: 'assets/images/crescente.jpg');
+      return Moon(fase_lua: 'Crescente', imagem: '../assets/images/moons/crescente.png');
     }
   }
   return Moon(

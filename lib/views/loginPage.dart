@@ -168,6 +168,9 @@ class _LoginPageState extends State<LoginPage> {
 
                         if (checkLogin(nameController.text,
                             passwordController.text, todos)) {
+
+                          _showToastSucess();
+
                           nameController.clear();
                           passwordController.clear();
 
@@ -176,13 +179,17 @@ class _LoginPageState extends State<LoginPage> {
                             MaterialPageRoute(
                                 builder: (context) => const HomePage()),
                           );
-                        } else {
-                          nameController.clear();
-                          passwordController.clear();
+                        } else if (empty == false){
+                            nameController.clear();
+                            passwordController.clear();
+                            _showToastError();
 
-                          _showToastError();
+                        } else if (empty == true){
+                            nameController.clear();
+                            passwordController.clear();
+                            _showToastEmpty();
                         }
-                      },
+                        },
                       child: const Text('Login'),
                     )
                 ),
@@ -262,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
       decoration:
       BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
-        color: Colors.red[600],
+        color: Colors.green[900],
       ),
       child: const Row(
         mainAxisSize: MainAxisSize.min,
@@ -329,6 +336,7 @@ class _LoginPageState extends State<LoginPage> {
 
 }
 
+bool empty = false, missing = false;
 bool checkLogin(String usuario, String senha, List<Login> lista) {
   if (usuario.isNotEmpty && senha.isNotEmpty) {
     for (Login login in lista) {
@@ -336,8 +344,9 @@ bool checkLogin(String usuario, String senha, List<Login> lista) {
         return true;
       }
     }
+  } else {
+    empty = true;
   }
-
   return false;
 }
 

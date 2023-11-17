@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:moon_phase_project/models/Login.dart';
 import 'package:moon_phase_project/repositories/login_repository.dart';
 import 'package:moon_phase_project/views/loginPage.dart';
-import 'package:styled_text/tags/styled_text_tag.dart';
-import 'package:styled_text/widgets/styled_text.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
