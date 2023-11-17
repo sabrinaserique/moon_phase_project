@@ -45,7 +45,7 @@ class MoonPhaseListItem extends StatelessWidget {
                         },
                       ),
                       StyledText(
-                        text: '<title>Dia lunar Conway:</title>  <value>${moonPhase.diaLunarConway}</value>',
+                        text: '<title>Dia lunar:</title>  <value>${moonPhase.diaLunarConway}</value>',
                         tags: {
                           'title': StyledTextTag(
                             style: TextStyle(

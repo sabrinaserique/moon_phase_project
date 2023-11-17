@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       builder: FToastBuilder(),
       theme: ThemeData(
         fontFamily: 'Poppins',
-        primarySwatch: Colors.blue
+        hoverColor: Colors.blueGrey
       ),
     );
   }

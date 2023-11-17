@@ -146,8 +146,11 @@ class _LoginPageState extends State<LoginPage> {
                     loginRepository.cleanShared();
                     todos.clear();
                   },
-                  child: const Text(
+                  child: Text(
                     'Esqueceu a senha?',
+                    style: TextStyle(
+                      color: Colors.purple.shade100
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -158,42 +161,54 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        textStyle: const TextStyle(
-                          color: Colors.blue
-                        ),
-                      ),
                       onPressed: () {
                         //pushReplacement
 
-                        if (checkLogin(nameController.text,
-                            passwordController.text, todos)) {
+                          if (checkLogin(nameController.text,
+                              passwordController.text, todos)) {
 
-                          _showToastSucess();
+                            _showToastSucess();
 
-                          nameController.clear();
-                          passwordController.clear();
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                          );
-                        } else if (empty == false){
                             nameController.clear();
                             passwordController.clear();
-                            _showToastError();
 
-                        } else if (empty == true){
-                            nameController.clear();
-                            passwordController.clear();
-                            _showToastEmpty();
-                        }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                            );
+                          } else if (empty == false){
+                              nameController.clear();
+                              passwordController.clear();
+                              _showToastError();
+
+                          } else if (empty == true){
+                              nameController.clear();
+                              passwordController.clear();
+                              _showToastEmpty();
+                          }
                         },
-                      child: const Text('Login'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.hovered)) {
+                                return Colors.blue.withOpacity(0.2);
+                              }
+                              return Colors.white;
+                            },
+                          ),
+                      ),
+                      child: const Text(
+                          'Login',
+                          style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 16
+                          ),
+                      ),
                     )
                 ),
                 const SizedBox(height: 16),
+                //Cadastre-se
                 Container(
                   padding: const EdgeInsets.only(top: 12),
                   child: Row(
@@ -201,12 +216,15 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         const Text(
                           'Não tem conta?',
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(color: Colors.blueGrey),
                         ),
                         TextButton(
                           child: const Text(
                             'Cadastre-se',
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.blueAccent
+                            ),
                           ),
                           onPressed: () {
                             Navigator.push(
